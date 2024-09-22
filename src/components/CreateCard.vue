@@ -1,11 +1,21 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useTaskStore } from '@/stores/task'
 
 const title = ref('')
 const description = ref('')
 
+const store = useTaskStore()
+
+const { addTask } = store
+
 const addItem = () => {
-  console.log(title.value, description.value)
+  addTask({
+    title: title.value,
+    description: description.value
+  })
+  title.value = ''
+  description.value = ''
 }
 </script>
 
@@ -14,7 +24,7 @@ const addItem = () => {
     <v-form class="pa-2" @submit.prevent>
       <v-text-field v-model.trim="title" label="Title"></v-text-field>
       <v-text-field v-model.trim="description" label="Description"></v-text-field>
-      <v-btn block class="my-2" color="indigo-darken-3" @click="addItem()">Submit</v-btn>
+      <v-btn block class="my-2" color="indigo-darken-3" @click="addItem">Submit</v-btn>
     </v-form>
   </v-card>
 </template>
