@@ -12,6 +12,7 @@ const { getTasks } = storeToRefs(store)
   <main>
     <TheCard
       v-for="(task, index) in getTasks"
+      :id="task.id"
       :key="index"
       :description="task.description"
       :title="task.title"

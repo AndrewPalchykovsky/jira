@@ -10,10 +10,15 @@ export const useTaskStore = defineStore('task', () => {
     tasks.value = [...tasks.value, task]
   }
 
-  return { tasks, getTasks, addTask }
+  const deleteTask = (id: string) => {
+    tasks.value = tasks.value.filter((item) => item.id !== id)
+  }
+
+  return { tasks, getTasks, addTask, deleteTask }
 })
 
 export interface Task {
+  id: string
   title: string
   description: string
 }

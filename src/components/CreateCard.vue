@@ -11,6 +11,7 @@ const { addTask } = store
 
 const addItem = () => {
   addTask({
+    id: new Date().getTime().toString(),
     title: title.value,
     description: description.value
   })
