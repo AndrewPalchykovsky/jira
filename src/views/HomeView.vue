@@ -5,13 +5,13 @@ import { useTaskStore } from '@/stores/task'
 import { storeToRefs } from 'pinia'
 
 const store = useTaskStore()
-const { getTasks } = storeToRefs(store)
+const { tasks } = storeToRefs(store)
 </script>
 
 <template>
   <main>
     <TheCard
-      v-for="(task, index) in getTasks"
+      v-for="(task, index) in tasks"
       :id="task.id"
       :key="index"
       :description="task.description"
