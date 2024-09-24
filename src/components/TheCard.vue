@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import { useTaskStore } from '@/stores/task'
+import { ref } from 'vue'
+import EditTaskModal from '@/components/EditTaskModal.vue'
 
 const props = defineProps<{
   id: string
@@ -8,6 +10,13 @@ const props = defineProps<{
 }>()
 const store = useTaskStore()
 const { deleteTask } = store
+const dialog = ref(false)
+const taskId = ref('')
+
+const openModal = (id: string) => {
+  taskId.value = id
+  dialog.value = true
+}
 </script>
 
 <template>
@@ -20,8 +29,11 @@ const { deleteTask } = store
       {{ description }}
     </v-card-text>
 
+    <v-btn class="ma-2" color="orange" @click="openModal(props.id)">Edit</v-btn>
     <v-btn class="my-2" color="red-accent-4" @click="deleteTask(props.id)">Delete</v-btn>
   </v-card>
+
+  <EditTaskModal :id="taskId" v-model:dialog="dialog" @close="dialog = false" />
 </template>
 
 <style scoped></style>
